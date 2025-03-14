@@ -33,10 +33,11 @@ class LoginForm(FlaskForm):
     password = PasswordField('Пароль', validators=[DataRequired()])
     submit = SubmitField('Войти')
 
-# Главная страница
+# Главная страница (требует входа)
 @app.route('/')
+@login_required
 def index():
-    return render_template('index.html')
+    return render_template('index.html', username=current_user.id)
 
 # Страница логина
 @app.route('/login', methods=['GET', 'POST'])
@@ -49,7 +50,7 @@ def login():
             user = User(username)
             login_user(user)
             flash('Вы успешно вошли!', 'success')
-            return redirect(url_for('profile'))
+            return redirect(url_for('index'))
         else:
             flash('Неправильные имя или пароль', 'danger')
     return render_template('login.html', form=form)
@@ -66,10 +67,11 @@ def profile():
 def logout():
     logout_user()
     flash('Вы вышли из системы', 'info')
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 # Страница "OK"
 @app.route('/ok')
+@login_required
 def ok():
     return render_template('ok.html')
 
