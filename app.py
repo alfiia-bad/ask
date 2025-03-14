@@ -14,7 +14,7 @@ login_manager.init_app(app)
 login_manager.login_view = "login"  # Перенаправление на страницу логина
 
 # Простая база пользователей (можно заменить на БД)
-users = {"admin": {"password": "1234"}}
+users = {"alfeikaa": {"password": "alfeikaa"}}
 
 # Класс пользователя
 class User(UserMixin):
