@@ -4,22 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Как дела?</title>
-     <style>
+    <style>
         /* Стили для адаптации изображения */
         img {
-            width: 100%;      /* Устанавливаем ширину изображения на 100% от родительского блока */
-            max-width: 500px; /* Ограничиваем максимальную ширину изображения */
-            height: auto;     /* Высота будет автоматически изменяться в зависимости от ширины */
+            width: 100%;
+            max-width: 500px;
+            height: auto;
         }
     </style>
 </head>
-<div>
-        <img src="https://yamal-media.ru/images/insecure/rs:fill-down:1080:608/aHR0cHM6Ly9zdG9yYWdlLnlhbmRleGNsb3VkLm5ldC95bS1zaXRlcy1zdGF0aWMvYTNlM2U0NjgtYTk5LndlYnA.webp" alt="Изображение" />
-</div>
 <body>
+    <div>
+        <img src="https://yamal-media.ru/images/insecure/rs:fill-down:1080:608/aHR0cHM6Ly9zdG9yYWdlLnlhbmRleGNsb3VkLm5ldC95bS1zaXRlcy1zdGF0aWMvYTNlM2U0NjgtYTk5LndlYnA.webp" alt="Изображение" />
+    </div>
+
     <h1>Как дела?</h1>
+
     <button onclick="window.location.href='/ok'">Плохо-плохо</button>
     <button onclick="window.location.href='/ok'">Неважно</button>
     <button onclick="window.location.href='/ok'">Дела у меня очень плохие</button>
+
+    <hr>
+
+    {% if current_user.is_authenticated %}
+        <p>Привет, {{ username }}!</p>
+        <a href="{{ url_for('profile') }}">Личный кабинет</a> |
+        <a href="{{ url_for('logout') }}">Выйти</a>
+    {% else %}
+        <a href="{{ url_for('login') }}">Войти</a>
+    {% endif %}
 </body>
 </html>
