@@ -13,6 +13,11 @@
             height: 100vh;
             background-color: #f4f4f4;
             margin: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background-color: #333;
+            color: #f4f4f4;
         }
         .login-container {
             background: white;
@@ -21,10 +26,18 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             width: 300px;
             text-align: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        body.dark-mode .login-container {
+            background: #444;
+            color: #f4f4f4;
         }
         .login-container h2 {
             margin-bottom: 1rem;
             color: #333;
+        }
+        body.dark-mode .login-container h2 {
+            color: #f4f4f4;
         }
         .login-container .form-group {
             width: 100%;
@@ -42,11 +55,19 @@
             border: 1px solid #ccc;
             margin-bottom: 8px;
         }
+        body.dark-mode .login-container input {
+            background: #555;
+            border: 1px solid #777;
+            color: #f4f4f4;
+        }
         .login-container button {
             background: #007bff;
             color: white;
             border: none;
             cursor: pointer;
+        }
+        body.dark-mode .login-container button {
+            background: #0056b3;
         }
         .login-container button:hover {
             background: #0056b3;
@@ -55,9 +76,37 @@
             color: red;
             margin-bottom: 1rem;
         }
+        header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            padding: 1rem;
+            background: #f4f4f4;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        body.dark-mode header {
+            background: #444;
+        }
+        .theme-toggle {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border: none;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        body.dark-mode .theme-toggle {
+            background: #0056b3;
+        }
     </style>
 </head>
 <body>
+    <header>
+        <button class="theme-toggle" onclick="toggleTheme()">Переключить тему</button>
+    </header>
     <div class="login-container">
         <h2>Вход</h2>
         {% for message in get_flashed_messages(category_filter=["danger"]) %}
@@ -76,5 +125,10 @@
             </div>
         </form>
     </div>
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
 </body>
 </html>
